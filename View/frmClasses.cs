@@ -1,5 +1,5 @@
 ﻿using Data.Business;
-using Data.TransferObjects;
+using Data.DataAccess;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,7 +14,7 @@ namespace Data.View
 {
     public partial class frmClasses : Form
     {
-        List<Class> cls;
+        List<Lop> cls;
         ClassManageBUS cm = new ClassManageBUS();
         public frmClasses()
         {
@@ -59,12 +59,12 @@ namespace Data.View
                 return false;
             }
         }
-        private Class getClassFromForm()
+        private Lop getClassFromForm()
         {
-            Class cl = null;
+            Lop cl = null;
             if (CheckTextBoxes())
             {
-                cl = new Class();
+                cl = new Lop();
                 cl.MaLop = txtId.Text.Trim();
                 cl.TenLop = txtName.Text.Trim();
                 cl.SiSo = int.Parse(txtTotal.Text);
@@ -75,7 +75,7 @@ namespace Data.View
         }
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            Class cl = getClassFromForm();
+            Lop cl = getClassFromForm();
             if (cl != null)
             {
                 cm.Add(cl);
@@ -88,7 +88,7 @@ namespace Data.View
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            Class cl = getClassFromForm();
+            Lop cl = getClassFromForm();
             if (cl != null)
             {
                 cm.Update(cl);
@@ -98,7 +98,7 @@ namespace Data.View
         }
         private void btnDel_Click(object sender, EventArgs e)
         {
-            Class cl = getClassFromForm();
+            Lop cl = getClassFromForm();
             if (cl != null)
             {
                 cm.Delete(getClassFromForm());

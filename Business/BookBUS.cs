@@ -1,5 +1,4 @@
 ﻿using Data.DataAccess;
-using Data.TransferObjects;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,23 +10,23 @@ namespace Data.Business
     public class BookBUS
     {
         BookDAO bookDAO = new BookDAO();
-        public List<Book> GetBooks()
+        public List<Sach> GetBooks()
         {
             return bookDAO.GetBooks();
         }
-        public List<Category> GetCategories()
+        public List<LoaiSach> GetCategories()
         {
             return bookDAO.GetCategories();
         }
-        public void Add(Book book)
+        public void Add(Sach book)
         {
             bookDAO.Add(book);
         }
-        public void Delete(Book book)
+        public void Delete(Sach book)
         {
             bookDAO.Delete(book);
         }
-        public void Update(Book book)
+        public void Update(Sach book)
         {
             bookDAO.Update(book);
         }

@@ -1,5 +1,4 @@
 ﻿using Data.DataAccess;
-using Data.TransferObjects;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -12,20 +11,20 @@ namespace Data.Business
     public class LoginBUS
     {
         UserDAO userDAO = new UserDAO();
-        public User GetUser(string us, string pw)
+        public Acount GetUser(string us, string pw)
         {
-            User user = userDAO.GetUser(us, pw);
+            Acount user = userDAO.GetUser(us, pw);
             return user;
         }
-        public User GetUser(string us)
+        public Acount GetUser(string us)
         {
-            User user = userDAO.GetUser(us);
+            Acount user = userDAO.GetUser(us);
             return user;
         }
 
-        public bool CreateAccount(User us)
+        public bool CreateAccount(Acount us)
         {
-            User user = userDAO.GetUser(us.UserName);
+            Acount user = userDAO.GetUser(us.username);
             if (user != null)
             {
                 return false;

@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Data.Business;
-using Data.TransferObjects;
+using Data.DataAccess;
 
 namespace Data.View
 {
@@ -19,26 +19,27 @@ namespace Data.View
             InitializeComponent();
         }
 
-        List<Book> books = new List<Book>();
+        List<Sach> books = new List<Sach>();
         BookBUS bookBUS = new BookBUS();
         public void LoadDB()
         {
             books = bookBUS.GetBooks();
+            List<Sach> displayBooks = new List<Sach>();
             dgvBook.DataSource = books;
+
         }
 
         private void frmBooks_Load(object sender, EventArgs e)
         {
-            List<Category> categories = new List<Category>();
-            categories = bookBUS.GetCategories();
-            cboCategoryBook.DataSource = categories.ToList();
+            List<LoaiSach> categories = bookBUS.GetCategories();
+            cboCategoryBook.DataSource = categories;
             cboCategoryBook.ValueMember = "MaLoaiSach";
             cboCategoryBook.DisplayMember = "TenLoaiSach";
             LoadDB();
         }
-        Book getBookFromForm()
+        Sach getBookFromForm()
         {
-            Book book = new Book();
+            Sach book = new Sach();
             book.MaSach = txtId.Text;
             book.MaLoaiSach = cboCategoryBook.SelectedValue.ToString();
             book.TieuDe = txtDescription.Text;
@@ -73,6 +74,11 @@ namespace Data.View
             txtDescription.Text = Convert.ToString(dgvBook.Rows[e.RowIndex].Cells[2].Value);
             txtPrice.Text = Convert.ToString(dgvBook.Rows[e.RowIndex].Cells[3].Value);
             txtQuantity.Text = Convert.ToString(dgvBook.Rows[e.RowIndex].Cells[4].Value);
+        }
+
+        private void cboCategoryBook_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

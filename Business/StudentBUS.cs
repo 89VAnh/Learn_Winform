@@ -1,5 +1,4 @@
 ﻿using Data.DataAccess;
-using Data.TransferObjects;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,30 +11,26 @@ namespace Data.Business
     {
         ClassDAO classDAO = new ClassDAO();
         StudentDAO StudentDAO = new StudentDAO();
-        List<Class> classes = new List<Class>();
+        List<Lop> classes = new List<Lop>();
 
-        List<Student> students = new List<Student>();
+        List<SinhVien> students = new List<SinhVien>();
 
-        public List<Class> GetClasses()
+        public List<Lop> GetClasses()
         {
             classes = classDAO.GetClasses();
             return classes;
         }
 
-        public List<Student> GetStudents()
+        public List<SinhVien> GetStudents()
         {
             students = StudentDAO.GetStudents();
-            for (int i = 0; i < students.Count; i++)
-            {
-                students[i].STT = i + 1;
-            }
             return students;
         }
 
-        public List<Student> GetStudentsByClassId(string classId)
+        public List<SinhVien> GetStudentsByClassId(string classId)
         {
-            List<Student> studentsByClassId = new List<Student>();
-            foreach (Student st in students)
+            List<SinhVien> studentsByClassId = new List<SinhVien>();
+            foreach (SinhVien st in students)
             {
                 if (st.MaLop == classId)
                 {
@@ -48,7 +43,7 @@ namespace Data.Business
         }
         public string getStudentId(string classId)
         {
-            List<Student> studentsInClass = GetStudentsByClassId(classId);
+            List<SinhVien> studentsInClass = GetStudentsByClassId(classId);
             if (studentsInClass.Count > 0)
             {
                 string lastStudentId = studentsInClass[studentsInClass.Count - 1].MaSV;
@@ -61,11 +56,11 @@ namespace Data.Business
                 return classId + "01";
         }
 
-        public bool Add(Student st)
+        public bool Add(SinhVien st)
         {
             string studentId = getStudentId(st.MaLop);
             st.MaSV = studentId;
-            Student s = StudentDAO.GetStudent(st.MaSV);
+            SinhVien s = StudentDAO.GetStudent(st.MaSV);
 
             if (s != null)
             {
@@ -79,9 +74,9 @@ namespace Data.Business
             }
         }
 
-        public bool Delete(Student st)
+        public bool Delete(SinhVien st)
         {
-            Student s = StudentDAO.GetStudent(st.MaLop);
+            SinhVien s = StudentDAO.GetStudent(st.MaLop);
             if (s != null)
             {
                 StudentDAO.Delete(st);
@@ -93,9 +88,9 @@ namespace Data.Business
                 return false;
             }
         }
-        public bool Update(Student st)
+        public bool Update(SinhVien st)
         {
-            Student s = students.Find(temp => temp.MaSV == st.MaSV);
+            SinhVien s = students.Find(temp => temp.MaSV == st.MaSV);
             if (s != null)
             {
                 if (s.MaLop != st.MaLop)

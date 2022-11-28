@@ -1,69 +1,49 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
+using System.Data.Entity.Migrations;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Data.TransferObjects;
 
 namespace Data.DataAccess
 {
     public class ClassDAO
     {
-        DataHelper dh = new DataHelper();
-        public List<Class> GetClasses()
+        QLSVEntities db = new QLSVEntities();
+        public List<Lop> GetClasses()
         {
-            SqlDataReader dr = dh.ExecuteReader("Select * from Lop");
-            List<Class> classes = new List<Class>();
-            while (dr.Read())
-            {
-                Class cl = new Class();
-                cl.MaLop = dr["MaLop"].ToString().Trim();
-                cl.TenLop = dr["TenLop"].ToString().Trim();
-                cl.SiSo = int.Parse(dr["SiSo"].ToString());
-                cl.GhiChu = dr["GhiChu"].ToString().Trim();
-                classes.Add(cl);
-            }
-            dh.Close();
-            return classes;
+            return db.Lops.ToList();
         }
-        public Class GetClass(string id)
+        public Lop GetClass(string id)
         {
-            SqlDataReader dr = dh.ExecuteReader($"Select * from Lop where MaLop = '{id}'");
-            Class cl = null;
-            while (dr.Read())
-            {
-                cl = new Class();
-                cl.MaLop = dr["MaLop"].ToString().Trim();
-                cl.TenLop = dr["TenLop"].ToString().Trim();
-                cl.SiSo = int.Parse(dr["SiSo"].ToString());
-                cl.GhiChu = dr["GhiChu"].ToString().Trim();
-                break;
-            }
-            dh.Close();
-            return cl;
+
+            return db.Lops.Find(id);
         }
 
-        public void Add(Class cl)
+        public void Add(Lop l)
         {
-            string query = $"Insert into Lop values('{cl.MaLop.Trim()}','{cl.TenLop.Trim()}',{cl.SiSo},N'{cl.GhiChu}')";
-            dh.ExecuteNonQuery(query);
+            db.Lops.Add(l);
+            db.SaveChanges();
         }
-        public void Update(Class cl)
+        public void Update(Lop l)
         {
-            string query = $"Update Lop set TenLop = '{cl.TenLop.Trim()}', SiSo = {cl.SiSo}, GhiChu = N'{cl.GhiChu}' where MaLop = '{cl.MaLop.Trim()}'";
-            dh.ExecuteNonQuery(query);
+            Lop lop = db.Lops.Find(l.MaLop);
+            lop.TenLop = l.MaLop;
+            db.SaveChanges();
         }
 
-        public void Delete(Class cl)
+        public void Delete(Lop l)
         {
-            string query = $"Delete Lop where MaLop = '{cl.MaLop.Trim()}'";
-            dh.ExecuteNonQuery(query);
+            db.Lops.Remove(l);
+            db.SaveChanges();
         }
         public void UpdateTotal(string classId, int changeValue)
         {
-            string query = $"update Lop set SiSo = SiSo + {changeValue} where MaLop='{classId}'";
-            dh.ExecuteNonQuery(query);
+            Lop lop = db.Lops.Find(classId);
+            lop.SiSo = lop.SiSo + changeValue;
+            db.SaveChanges();
         }
     }
 }

@@ -1,5 +1,5 @@
 ﻿using Data.Business;
-using Data.TransferObjects;
+using Data.DataAccess;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -41,10 +41,9 @@ namespace Data.View
             }
             if (txtPW.Text == txtRePW.Text)
             {
-
-                User user = new User();
-                user.UserName = txtUN.Text;
-                user.Password = txtPW.Text;
+                Acount user = new Acount();
+                user.username = txtUN.Text;
+                user.password = txtPW.Text;
                 if (loginBUS.CreateAccount(user))
                 {
                     MessageBox.Show("Tạo tài khoản thành công !");

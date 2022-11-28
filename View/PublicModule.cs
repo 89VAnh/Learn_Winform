@@ -1,4 +1,4 @@
-﻿using Data.TransferObjects;
+﻿using Data.DataAccess;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +9,6 @@ namespace Data.View
 {
     public class PublicModule
     {
-        public static User us = null;
+        public static Acount us = null;
     }
 }

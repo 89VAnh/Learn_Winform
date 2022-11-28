@@ -1,5 +1,5 @@
 ﻿using Data.Business;
-using Data.TransferObjects;
+using Data.DataAccess;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,8 +14,8 @@ namespace Data.View
 {
     public partial class frmStudents : Form
     {
-        List<Student> sts;
-        List<Class> cls;
+        List<SinhVien> sts;
+        List<Lop> cls;
         StudentBUS stm = new StudentBUS();
         public frmStudents()
         {
@@ -57,12 +57,12 @@ namespace Data.View
                 return false;
             }
         }
-        private Student getStudentFromForm()
+        private SinhVien getStudentFromForm()
         {
-            Student st = null;
+            SinhVien st = null;
             if (CheckTextBoxes())
             {
-                st = new Student();
+                st = new SinhVien();
                 st.MaSV = txtId.Text.Trim();
                 st.MaLop = cboClass.SelectedValue.ToString().Trim();
                 st.HoTen = txtName.Text.Trim();
@@ -75,21 +75,14 @@ namespace Data.View
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            Student st = getStudentFromForm();
+            SinhVien st = getStudentFromForm();
             if (st != null)
             {
                 stm.Add(st);
-                MessageBox.Show("Thêm thành công !");
                 sts.Add(st);
                 dgvStudents.DataSource = null;
                 dgvStudents.DataSource = sts;
-                //if (dgvStudents.RowCount > 0)
-                //{
-
-                dgvStudents.CurrentCell = dgvStudents.Rows[dgvStudents.RowCount - 1].Cells[0];
-                //}
-                //else
-                //    dgvStudents.CurrentCell = dgvStudents.Rows[0].Cells[0];
+                MessageBox.Show("Thêm thành công !");
             }
         }
 
@@ -100,14 +93,14 @@ namespace Data.View
 
         private void btnDel_Click(object sender, EventArgs e)
         {
-            Student s = getStudentFromForm();
+            SinhVien s = getStudentFromForm();
             if (s != null)
             {
                 stm.Delete(s);
-                MessageBox.Show("Xoá thành công !");
                 sts.Remove(s);
                 dgvStudents.DataSource = null;
                 dgvStudents.DataSource = sts;
+                MessageBox.Show("Xoá thành công !");
             }
         }
 
@@ -136,6 +129,18 @@ namespace Data.View
                 btnEdit.Enabled = true;
             }
         }
+
+        private void btnEdit_Click(object sender, EventArgs e)
+        {
+            SinhVien s = getStudentFromForm();
+            if (s != null)
+            {
+                stm.Update(s);
+                LoadDB();
+                MessageBox.Show("Sửa thành công !");
+            }
+        }
+
 
     }
 }

@@ -33,8 +33,17 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -50,16 +59,40 @@
     <Compile Include="Business\ClassManageBUS.cs" />
     <Compile Include="Business\LoginBUS.cs" />
     <Compile Include="Business\StudentBUS.cs" />
+    <Compile Include="DataAccess\Acount.cs">
+      <DependentUpon>QLSVModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="DataAccess\BookDAO.cs" />
     <Compile Include="DataAccess\ClassDAO.cs" />
-    <Compile Include="DataAccess\DataHelper.cs" />
+    <Compile Include="DataAccess\LoaiSach.cs">
+      <DependentUpon>QLSVModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataAccess\Lop.cs">
+      <DependentUpon>QLSVModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataAccess\QLSVModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>QLSVModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataAccess\QLSVModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>QLSVModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataAccess\QLSVModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>QLSVModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="DataAccess\Sach.cs">
+      <DependentUpon>QLSVModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataAccess\SinhVien.cs">
+      <DependentUpon>QLSVModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="DataAccess\StudentDAO.cs" />
     <Compile Include="DataAccess\UserDAO.cs" />
-    <Compile Include="TransferObjects\Book.cs" />
-    <Compile Include="TransferObjects\Category.cs" />
-    <Compile Include="TransferObjects\Class.cs" />
-    <Compile Include="TransferObjects\Student.cs" />
-    <Compile Include="TransferObjects\User.cs" />
     <Compile Include="View\frmBooks.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -126,6 +159,15 @@
     <EmbeddedResource Include="View\frmSignin.resx">
       <DependentUpon>frmSignin.cs</DependentUpon>
     </EmbeddedResource>
+    <EntityDeploy Include="DataAccess\QLSVModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>QLSVModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="App.Config" />
+    <None Include="DataAccess\QLSVModel.edmx.diagram">
+      <DependentUpon>QLSVModel.edmx</DependentUpon>
+    </None>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -137,8 +179,19 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="DataAccess\QLSVModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>QLSVModel.Context.cs</LastGenOutput>
+      <DependentUpon>QLSVModel.edmx</DependentUpon>
+    </Content>
+    <Content Include="DataAccess\QLSVModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>QLSVModel.edmx</DependentUpon>
+      <LastGenOutput>QLSVModel.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

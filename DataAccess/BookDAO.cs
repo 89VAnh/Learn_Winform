@@ -5,62 +5,41 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Data.Business;
-using Data.TransferObjects;
 
 namespace Data.DataAccess
 {
     public class BookDAO
     {
-        DataHelper dh = new DataHelper();
+        QLSVEntities db = new QLSVEntities();
 
-        public List<Book> GetBooks()
+        public List<Sach> GetBooks()
         {
-            SqlDataReader dr = dh.ExecuteReader("SELECT * FROM Sach");
-            List<Book> books = new List<Book>();
-
-            while (dr.Read())
-            {
-                Book b = new Book();
-                b.MaSach = dr["MaSach"].ToString().Trim();
-                b.MaLoaiSach = dr["MaLoaiSach"].ToString().Trim();
-                b.TieuDe = dr["TieuDe"].ToString().Trim();
-                b.Gia = int.Parse(dr["Gia"].ToString());
-                b.SoLuong = int.Parse(dr["SoLuong"].ToString());
-                books.Add(b);
-            }
-            dh.Close();
-            return books;
+            return db.Saches.ToList();
         }
-        public List<Category> GetCategories()
+        public List<LoaiSach> GetCategories()
         {
-            SqlDataReader dr = dh.ExecuteReader("SELECT * FROM LoaiSach");
-            List<Category> categories = new List<Category>();
-
-            while (dr.Read())
-            {
-                Category c = new Category();
-                c.MaLoaiSach = dr["MaLoaiSach"].ToString().Trim();
-                c.TenLoaiSach = dr["TenLoaiSach"].ToString().Trim();
-                categories.Add(c);
-            }
-            dh.Close();
-            return categories;
+            return db.LoaiSaches.ToList();
         }
-        public void Add(Book book)
+        public void Add(Sach book)
         {
-            string query = $"Insert into Sach values('{book.MaSach.Trim()}','{book.MaLoaiSach.Trim()}',N'{book.TieuDe}',{book.Gia},{book.SoLuong})";
-            dh.ExecuteNonQuery(query);
+            db.Saches.Add(book);
+            db.SaveChanges();
         }
-        public void Update(Book book)
+        public void Update(Sach book)
         {
-            string query = $"Update Sach set MaLoaiSach = '{book.MaLoaiSach}', TieuDe = N'{book.TieuDe}', Gia = {book.Gia},SoLuong = {book.SoLuong} where MaSach = '{book.MaSach.Trim()}'";
-            dh.ExecuteNonQuery(query);
+            Sach s = db.Saches.Find(book.MaSach);
+            s.MaLoaiSach = book.MaLoaiSach;
+            s.TieuDe = book.TieuDe;
+            s.Gia = book.Gia;
+            s.SoLuong = book.SoLuong;
+            db.SaveChanges();
         }
 
-        public void Delete(Book book)
+        public void Delete(Sach book)
         {
-            string query = $"Delete Sach where MaSach = '{book.MaSach.Trim()}'";
-            dh.ExecuteNonQuery(query);
+            Sach s = db.Saches.Find(book.MaSach);
+            db.Saches.Remove(s);
+            db.SaveChanges();
         }
 
     }

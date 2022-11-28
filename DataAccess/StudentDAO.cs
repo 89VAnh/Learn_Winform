@@ -1,69 +1,45 @@
-﻿using Data.TransferObjects;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace Data.DataAccess
 {
     public class StudentDAO
     {
-        DataHelper dh = new DataHelper();
-        public List<Student> GetStudents()
+        QLSVEntities db = new QLSVEntities();
+        public List<SinhVien> GetStudents()
         {
-            SqlDataReader dr = dh.ExecuteReader("Select * from SinhVien");
-            List<Student> students = new List<Student>();
-            while (dr.Read())
-            {
-                Student st = new Student();
-                st.MaSV = dr["MaSV"].ToString().Trim();
-                st.MaLop = dr["MaLop"].ToString().Trim();
-                st.HoTen = dr["HoTen"].ToString().Trim();
-                st.QueQuan = dr["QueQuan"].ToString().Trim();
-                st.NgaySinh = (DateTime)dr["NgaySinh"];
-                students.Add(st);
-            }
-            dh.Close();
-            return students;
+
+            return db.SinhViens.ToList();
         }
-        public Student GetStudent(string id)
+        public SinhVien GetStudent(string id)
         {
-            SqlDataReader dr = dh.ExecuteReader($"Select * from SinhVien where MaSV = '{id}'");
-            Student st = null;
-            while (dr.Read())
-            {
-                st = new Student();
-                st.MaSV = dr["MaSV"].ToString().Trim();
-                st.MaLop = dr["MaLop"].ToString().Trim();
-                st.HoTen = dr["HoTen"].ToString().Trim();
-                st.QueQuan = dr["QueQuan"].ToString().Trim();
-                st.NgaySinh = (DateTime)dr["NgaySinh"];
-                break;
-            }
-            dh.Close();
-            return st;
+
+            return db.SinhViens.Find(id);
         }
 
-        public void Add(Student st)
+        public void Add(SinhVien sv)
         {
-            string query = $"Insert into SinhVien values('{st.MaSV}','{st.MaLop}',N'{st.HoTen}',N'{st.QueQuan}','{st.NgaySinh}')";
-            dh.ExecuteNonQuery(query);
+            db.SinhViens.Add(sv);
+            db.SaveChanges();
         }
-        public void Update(Student st)
+        public void Update(SinhVien sv)
         {
-            string query = $"Update SinhVien set  MaSV = '{st.MaSV}', MaLop = '{st.MaLop}', HoTen = N'{st.HoTen}' where NgaySinh = {st.NgaySinh}";
-            dh.ExecuteNonQuery(query);
-        }
-
-        public void Delete(Student st)
-        {
-            string query = $"Delete SinhVien where MaSV = '{st.MaSV}'";
-            dh.ExecuteNonQuery(query);
+            SinhVien sinhVien = db.SinhViens.Find(sv.MaSV);
+            sinhVien.MaLop = sv.MaLop;
+            sinhVien.HoTen = sv.HoTen;
+            sinhVien.QueQuan = sv.QueQuan;
+            sinhVien.NgaySinh = sv.NgaySinh;
+            db.SaveChanges();
         }
 
-
+        public void Delete(SinhVien sv)
+        {
+            db.SinhViens.Remove(sv);
+            db.SaveChanges();
+        }
     }
 }

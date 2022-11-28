@@ -5,67 +5,37 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data;
 using System.Data.SqlClient;
-
-using Data.TransferObjects;
 using System.Windows.Forms;
 
 namespace Data.DataAccess
 {
     internal class UserDAO
     {
-        DataHelper dh = new DataHelper();
-        public User GetUser(string us)
+        QLSVEntities db = new QLSVEntities();
+        public Acount GetUser(string us)
         {
-            string query = $"Select * from Acount where username = '{us}'";
-            SqlDataReader dr = dh.ExecuteReader(query);
-
-            User user = null;
-            while (dr.Read())
-            {
-                user = new User();
-                user.UserID = (short)dr["id"];
-                user.UserName = dr["username"].ToString();
-                user.Password = dr["password"].ToString();
-
-                break;
-            }
-            dh.Close();
-            return user;
+            return db.Acounts.SingleOrDefault(a => a.username == us);
         }
-        public User GetUser(string us, string pw)
+        public Acount GetUser(string us, string pw)
         {
-            string query = $"Select * from Acount where username = '{us}' and password = '{pw}'";
-            SqlDataReader dr = dh.ExecuteReader(query);
-
-            User user = null;
-            while (dr.Read())
-            {
-                user = new User();
-                user.UserID = (short)dr["id"];
-                user.UserName = dr["username"].ToString();
-                user.Password = dr["password"].ToString();
-
-                break;
-            }
-            dh.Close();
-            return user;
+            return db.Acounts.SingleOrDefault(a => a.username == us && a.password == pw);
         }
 
-        public void Add(User user)
+        public void Add(Acount user)
         {
-            string query = $"Insert into Acount(username,password) values('{user.UserName}','{user.Password}')";
-            dh.ExecuteNonQuery(query);
+            db.Acounts.Add(user);
         }
-        public void Update(User user)
+        public void Update(Acount user)
         {
-            string query = $"Update Acount set password = '{user.Password}' where username = '{user.UserName}'";
-            dh.ExecuteNonQuery(query);
+            Acount u = db.Acounts.Find(user.Id);
+            u.username = user.username;
+            u.password = user.password;
+            db.SaveChanges();
         }
 
-        public void Delete(User user)
+        public void Delete(Acount user)
         {
-            string query = $"Delete Acount where id = {user.UserID}";
-            dh.ExecuteNonQuery(query);
+            db.Acounts.Remove(user);
         }
 
     }

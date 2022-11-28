@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Data.TransferObjects;
 using Data.DataAccess;
 
 namespace Data.Business
@@ -13,14 +12,14 @@ namespace Data.Business
     {
         ClassDAO classDAO = new ClassDAO();
 
-        public List<Class> GetClasses()
+        public List<Lop> GetClasses()
         {
             return classDAO.GetClasses();
         }
 
-        public bool Add(Class cl)
+        public bool Add(Lop cl)
         {
-            Class l = classDAO.GetClass(cl.MaLop);
+            Lop l = classDAO.GetClass(cl.MaLop);
             if (l != null)
             {
                 return false;
@@ -32,9 +31,9 @@ namespace Data.Business
             }
         }
 
-        public bool Delete(Class cl)
+        public bool Delete(Lop cl)
         {
-            Class l = classDAO.GetClass(cl.MaLop);
+            Lop l = classDAO.GetClass(cl.MaLop);
             if (l != null)
             {
                 classDAO.Delete(cl);
@@ -45,9 +44,9 @@ namespace Data.Business
                 return false;
             }
         }
-        public bool Update(Class cl)
+        public bool Update(Lop cl)
         {
-            Class l = classDAO.GetClass(cl.MaLop);
+            Lop l = classDAO.GetClass(cl.MaLop);
             if (l != null)
             {
                 classDAO.Update(cl);

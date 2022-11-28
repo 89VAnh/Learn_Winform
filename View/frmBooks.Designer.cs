@@ -38,11 +38,11 @@
             this.txtPrice = new System.Windows.Forms.TextBox();
             this.txtQuantity = new System.Windows.Forms.TextBox();
             this.dgvBook = new System.Windows.Forms.DataGridView();
-            this.cboCategoryBook = new System.Windows.Forms.ComboBox();
             this.btnAdd = new System.Windows.Forms.Button();
             this.btnEdit = new System.Windows.Forms.Button();
             this.btnDel = new System.Windows.Forms.Button();
             this.btnRefresh = new System.Windows.Forms.Button();
+            this.cboCategoryBook = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvBook)).BeginInit();
             this.SuspendLayout();
             // 
@@ -134,14 +134,6 @@
             this.dgvBook.TabIndex = 9;
             this.dgvBook.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvBook_CellClick);
             // 
-            // cboCategoryBook
-            // 
-            this.cboCategoryBook.FormattingEnabled = true;
-            this.cboCategoryBook.Location = new System.Drawing.Point(90, 43);
-            this.cboCategoryBook.Name = "cboCategoryBook";
-            this.cboCategoryBook.Size = new System.Drawing.Size(200, 24);
-            this.cboCategoryBook.TabIndex = 0;
-            // 
             // btnAdd
             // 
             this.btnAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
@@ -185,16 +177,27 @@
             this.btnRefresh.Text = "Làm mới";
             this.btnRefresh.UseVisualStyleBackColor = true;
             // 
+            // cboCategoryBook
+            // 
+            this.cboCategoryBook.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboCategoryBook.FormattingEnabled = true;
+            this.cboCategoryBook.Location = new System.Drawing.Point(90, 41);
+            this.cboCategoryBook.Name = "cboCategoryBook";
+            this.cboCategoryBook.Size = new System.Drawing.Size(200, 24);
+            this.cboCategoryBook.TabIndex = 0;
+            this.cboCategoryBook.SelectedIndexChanged += new System.EventHandler(this.cboCategoryBook_SelectedIndexChanged);
+            // 
             // frmBooks
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(625, 444);
+            this.ControlBox = false;
+            this.Controls.Add(this.cboCategoryBook);
             this.Controls.Add(this.btnRefresh);
             this.Controls.Add(this.btnDel);
             this.Controls.Add(this.btnEdit);
             this.Controls.Add(this.btnAdd);
-            this.Controls.Add(this.cboCategoryBook);
             this.Controls.Add(this.dgvBook);
             this.Controls.Add(this.txtQuantity);
             this.Controls.Add(this.txtPrice);
@@ -205,7 +208,10 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "frmBooks";
+            this.ShowIcon = false;
             this.Text = "frmBooks";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.frmBooks_Load);
@@ -227,10 +233,10 @@
         private System.Windows.Forms.TextBox txtPrice;
         private System.Windows.Forms.TextBox txtQuantity;
         private System.Windows.Forms.DataGridView dgvBook;
-        private System.Windows.Forms.ComboBox cboCategoryBook;
         private System.Windows.Forms.Button btnEdit;
         private System.Windows.Forms.Button btnDel;
         private System.Windows.Forms.Button btnRefresh;
         private System.Windows.Forms.Button btnAdd;
+        private System.Windows.Forms.ComboBox cboCategoryBook;
     }
 }
