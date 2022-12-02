@@ -1,6 +1,7 @@
 ﻿using Data.DataAccess;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,25 +11,49 @@ namespace Data.Business
     public class BookBUS
     {
         BookDAO bookDAO = new BookDAO();
-        public List<Sach> GetBooks()
+        DbSet<Sach> books;
+        public DbSet<Sach> GetBooks()
         {
-            return bookDAO.GetBooks();
+            books = bookDAO.GetBooks();
+            return books;
         }
-        public List<LoaiSach> GetCategories()
+        public DbSet<LoaiSach> GetCategories()
         {
             return bookDAO.GetCategories();
         }
-        public void Add(Sach book)
+        public bool Add(Sach book)
         {
-            bookDAO.Add(book);
+            if (books.Find(book.MaSach) == null)
+            {
+                bookDAO.Add(book);
+                return true;
+            }
+            else
+                return false;
         }
-        public void Delete(Sach book)
+        public bool Delete(Sach book)
         {
-            bookDAO.Delete(book);
+            if (books.Find(book.MaSach) != null)
+            {
+                bookDAO.Delete(book);
+                return true;
+            }
+            else
+                return false;
         }
-        public void Update(Sach book)
+        public bool Update(Sach book)
         {
-            bookDAO.Update(book);
+            if (books.Find(book.MaSach) != null)
+            {
+                bookDAO.Update(book);
+                return true;
+            }
+            else
+                return false;
+        }
+        public IQueryable<Sach> GetBookByCategory(string categoryId)
+        {
+            return bookDAO.GetBookByCategory(categoryId);
         }
     }
 }

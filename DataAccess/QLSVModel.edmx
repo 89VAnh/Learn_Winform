@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="QLSVModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="QLSVModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Acount">
           <Key>
             <PropertyRef Name="Id" />
@@ -18,7 +18,7 @@
             <PropertyRef Name="MaLoaiSach" />
           </Key>
           <Property Name="MaLoaiSach" Type="nchar" MaxLength="10" Nullable="false" />
-          <Property Name="TenLoaiSach" Type="nchar" MaxLength="100" />
+          <Property Name="TenLoaiSach" Type="nvarchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="Lop">
           <Key>
@@ -49,7 +49,7 @@
           <Property Name="QueQuan" Type="nvarchar" MaxLength="200" />
           <Property Name="NgaySinh" Type="datetime" />
         </EntityType>
-        <Association Name="FK__Sach__MaLoaiSach__4BAC3F29">
+        <Association Name="FK__Sach__MaLoaiSach__628FA481">
           <End Role="LoaiSach" Type="Self.LoaiSach" Multiplicity="0..1" />
           <End Role="Sach" Type="Self.Sach" Multiplicity="*" />
           <ReferentialConstraint>
@@ -79,7 +79,7 @@
           <EntitySet Name="Lop" EntityType="Self.Lop" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Sach" EntityType="Self.Sach" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SinhVien" EntityType="Self.SinhVien" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__Sach__MaLoaiSach__4BAC3F29" Association="Self.FK__Sach__MaLoaiSach__4BAC3F29">
+          <AssociationSet Name="FK__Sach__MaLoaiSach__628FA481" Association="Self.FK__Sach__MaLoaiSach__628FA481">
             <End Role="LoaiSach" EntitySet="LoaiSach" />
             <End Role="Sach" EntitySet="Sach" />
           </AssociationSet>
@@ -88,8 +88,7 @@
             <End Role="SinhVien" EntitySet="SinhVien" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="QLSVModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -101,14 +100,6 @@
           <Property Name="username" Type="String" MaxLength="100" FixedLength="true" Unicode="false" Nullable="false" />
           <Property Name="password" Type="String" MaxLength="100" FixedLength="true" Unicode="false" Nullable="false" />
         </EntityType>
-        <EntityType Name="LoaiSach">
-          <Key>
-            <PropertyRef Name="MaLoaiSach" />
-          </Key>
-          <Property Name="MaLoaiSach" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
-          <Property Name="TenLoaiSach" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
-          <NavigationProperty Name="Saches" Relationship="Self.FK__Sach__MaLoaiSach__4BAC3F29" FromRole="LoaiSach" ToRole="Sach" />
-        </EntityType>
         <EntityType Name="Lop">
           <Key>
             <PropertyRef Name="MaLop" />
@@ -118,17 +109,6 @@
           <Property Name="SiSo" Type="Int32" />
           <Property Name="GhiChu" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="SinhViens" Relationship="Self.FK__SinhVien__MaLop__3C69FB99" FromRole="Lop" ToRole="SinhVien" />
-        </EntityType>
-        <EntityType Name="Sach">
-          <Key>
-            <PropertyRef Name="MaSach" />
-          </Key>
-          <Property Name="MaSach" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
-          <Property Name="MaLoaiSach" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="TieuDe" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="Gia" Type="Int32" />
-          <Property Name="SoLuong" Type="Int32" />
-          <NavigationProperty Name="LoaiSach" Relationship="Self.FK__Sach__MaLoaiSach__4BAC3F29" FromRole="Sach" ToRole="LoaiSach" />
         </EntityType>
         <EntityType Name="SinhVien">
           <Key>
@@ -141,18 +121,6 @@
           <Property Name="NgaySinh" Type="DateTime" Precision="3" />
           <NavigationProperty Name="Lop" Relationship="Self.FK__SinhVien__MaLop__3C69FB99" FromRole="SinhVien" ToRole="Lop" />
         </EntityType>
-        <Association Name="FK__Sach__MaLoaiSach__4BAC3F29">
-          <End Role="LoaiSach" Type="Self.LoaiSach" Multiplicity="0..1" />
-          <End Role="Sach" Type="Self.Sach" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="LoaiSach">
-              <PropertyRef Name="MaLoaiSach" />
-            </Principal>
-            <Dependent Role="Sach">
-              <PropertyRef Name="MaLoaiSach" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__SinhVien__MaLop__3C69FB99">
           <End Role="Lop" Type="Self.Lop" Multiplicity="0..1" />
           <End Role="SinhVien" Type="Self.SinhVien" Multiplicity="*" />
@@ -167,19 +135,50 @@
         </Association>
         <EntityContainer Name="QLSVEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Acounts" EntityType="Self.Acount" />
-          <EntitySet Name="LoaiSaches" EntityType="Self.LoaiSach" />
           <EntitySet Name="Lops" EntityType="Self.Lop" />
-          <EntitySet Name="Saches" EntityType="Self.Sach" />
           <EntitySet Name="SinhViens" EntityType="Self.SinhVien" />
-          <AssociationSet Name="FK__Sach__MaLoaiSach__4BAC3F29" Association="Self.FK__Sach__MaLoaiSach__4BAC3F29">
-            <End Role="LoaiSach" EntitySet="LoaiSaches" />
-            <End Role="Sach" EntitySet="Saches" />
-          </AssociationSet>
           <AssociationSet Name="FK__SinhVien__MaLop__3C69FB99" Association="Self.FK__SinhVien__MaLop__3C69FB99">
             <End Role="Lop" EntitySet="Lops" />
             <End Role="SinhVien" EntitySet="SinhViens" />
           </AssociationSet>
+          <EntitySet Name="LoaiSaches" EntityType="QLSVModel.LoaiSach" />
+          <EntitySet Name="Saches" EntityType="QLSVModel.Sach" />
+          <AssociationSet Name="FK__Sach__MaLoaiSach__628FA481" Association="QLSVModel.FK__Sach__MaLoaiSach__628FA481">
+            <End Role="LoaiSach" EntitySet="LoaiSaches" />
+            <End Role="Sach" EntitySet="Saches" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="LoaiSach">
+          <Key>
+            <PropertyRef Name="MaLoaiSach" />
+          </Key>
+          <Property Name="MaLoaiSach" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="TenLoaiSach" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Saches" Relationship="QLSVModel.FK__Sach__MaLoaiSach__628FA481" FromRole="LoaiSach" ToRole="Sach" />
+        </EntityType>
+        <EntityType Name="Sach">
+          <Key>
+            <PropertyRef Name="MaSach" />
+          </Key>
+          <Property Name="MaSach" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="MaLoaiSach" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="TieuDe" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Gia" Type="Int32" />
+          <Property Name="SoLuong" Type="Int32" />
+          <NavigationProperty Name="LoaiSach" Relationship="QLSVModel.FK__Sach__MaLoaiSach__628FA481" FromRole="Sach" ToRole="LoaiSach" />
+        </EntityType>
+        <Association Name="FK__Sach__MaLoaiSach__628FA481">
+          <End Type="QLSVModel.LoaiSach" Role="LoaiSach" Multiplicity="0..1" />
+          <End Type="QLSVModel.Sach" Role="Sach" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LoaiSach">
+              <PropertyRef Name="MaLoaiSach" />
+            </Principal>
+            <Dependent Role="Sach">
+              <PropertyRef Name="MaLoaiSach" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -195,14 +194,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="LoaiSaches">
-            <EntityTypeMapping TypeName="QLSVModel.LoaiSach">
-              <MappingFragment StoreEntitySet="LoaiSach">
-                <ScalarProperty Name="MaLoaiSach" ColumnName="MaLoaiSach" />
-                <ScalarProperty Name="TenLoaiSach" ColumnName="TenLoaiSach" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Lops">
             <EntityTypeMapping TypeName="QLSVModel.Lop">
               <MappingFragment StoreEntitySet="Lop">
@@ -210,17 +201,6 @@
                 <ScalarProperty Name="TenLop" ColumnName="TenLop" />
                 <ScalarProperty Name="SiSo" ColumnName="SiSo" />
                 <ScalarProperty Name="GhiChu" ColumnName="GhiChu" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Saches">
-            <EntityTypeMapping TypeName="QLSVModel.Sach">
-              <MappingFragment StoreEntitySet="Sach">
-                <ScalarProperty Name="MaSach" ColumnName="MaSach" />
-                <ScalarProperty Name="MaLoaiSach" ColumnName="MaLoaiSach" />
-                <ScalarProperty Name="TieuDe" ColumnName="TieuDe" />
-                <ScalarProperty Name="Gia" ColumnName="Gia" />
-                <ScalarProperty Name="SoLuong" ColumnName="SoLuong" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -232,6 +212,25 @@
                 <ScalarProperty Name="HoTen" ColumnName="HoTen" />
                 <ScalarProperty Name="QueQuan" ColumnName="QueQuan" />
                 <ScalarProperty Name="NgaySinh" ColumnName="NgaySinh" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LoaiSaches">
+            <EntityTypeMapping TypeName="QLSVModel.LoaiSach">
+              <MappingFragment StoreEntitySet="LoaiSach">
+                <ScalarProperty Name="TenLoaiSach" ColumnName="TenLoaiSach" />
+                <ScalarProperty Name="MaLoaiSach" ColumnName="MaLoaiSach" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Saches">
+            <EntityTypeMapping TypeName="QLSVModel.Sach">
+              <MappingFragment StoreEntitySet="Sach">
+                <ScalarProperty Name="SoLuong" ColumnName="SoLuong" />
+                <ScalarProperty Name="Gia" ColumnName="Gia" />
+                <ScalarProperty Name="TieuDe" ColumnName="TieuDe" />
+                <ScalarProperty Name="MaLoaiSach" ColumnName="MaLoaiSach" />
+                <ScalarProperty Name="MaSach" ColumnName="MaSach" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

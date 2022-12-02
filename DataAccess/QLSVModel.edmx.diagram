@@ -6,12 +6,12 @@
     <edmx:Diagrams>
       <Diagram DiagramId="d1ea43be24ce4854b3ba7ca53a552ec1" Name="Diagram1">
         <EntityTypeShape EntityType="QLSVModel.Acount" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="QLSVModel.LoaiSach" Width="1.5" PointX="0.75" PointY="5.25" IsExpanded="true" />
         <EntityTypeShape EntityType="QLSVModel.Lop" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="QLSVModel.Sach" Width="1.5" PointX="3" PointY="4.875" IsExpanded="true" />
         <EntityTypeShape EntityType="QLSVModel.SinhVien" Width="1.5" PointX="3" PointY="0.875" IsExpanded="true" />
-        <AssociationConnector Association="QLSVModel.FK__Sach__MaLoaiSach__4BAC3F29" ManuallyRouted="false" />
         <AssociationConnector Association="QLSVModel.FK__SinhVien__MaLop__3C69FB99" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="QLSVModel.LoaiSach" Width="1.5" PointX="0.75" PointY="5.25" />
+        <EntityTypeShape EntityType="QLSVModel.Sach" Width="1.5" PointX="3" PointY="5" />
+        <AssociationConnector Association="QLSVModel.FK__Sach__MaLoaiSach__628FA481" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

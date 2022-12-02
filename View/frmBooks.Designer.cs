@@ -43,6 +43,11 @@
             this.btnDel = new System.Windows.Forms.Button();
             this.btnRefresh = new System.Windows.Forms.Button();
             this.cboCategoryBook = new System.Windows.Forms.ComboBox();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvBook)).BeginInit();
             this.SuspendLayout();
             // 
@@ -52,7 +57,7 @@
             this.label1.Location = new System.Drawing.Point(13, 46);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(71, 16);
-            this.label1.TabIndex = 0;
+            this.label1.TabIndex = 1;
             this.label1.Text = "Loại sách :";
             // 
             // label2
@@ -61,7 +66,7 @@
             this.label2.Location = new System.Drawing.Point(13, 103);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(64, 16);
-            this.label2.TabIndex = 1;
+            this.label2.TabIndex = 0;
             this.label2.Text = "Mã sách :";
             // 
             // label3
@@ -96,7 +101,7 @@
             this.txtId.Location = new System.Drawing.Point(90, 100);
             this.txtId.Name = "txtId";
             this.txtId.Size = new System.Drawing.Size(200, 22);
-            this.txtId.TabIndex = 1;
+            this.txtId.TabIndex = 0;
             // 
             // txtDescription
             // 
@@ -125,19 +130,25 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvBook.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvBook.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Column1,
+            this.Column2,
+            this.Column3,
+            this.Column4,
+            this.Column5});
             this.dgvBook.Location = new System.Drawing.Point(16, 216);
             this.dgvBook.Name = "dgvBook";
             this.dgvBook.RowHeadersWidth = 51;
             this.dgvBook.RowTemplate.Height = 24;
             this.dgvBook.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvBook.Size = new System.Drawing.Size(593, 171);
+            this.dgvBook.Size = new System.Drawing.Size(971, 200);
             this.dgvBook.TabIndex = 9;
             this.dgvBook.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvBook_CellClick);
             // 
             // btnAdd
             // 
             this.btnAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnAdd.Location = new System.Drawing.Point(90, 407);
+            this.btnAdd.Location = new System.Drawing.Point(90, 436);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(75, 23);
             this.btnAdd.TabIndex = 5;
@@ -148,7 +159,7 @@
             // btnEdit
             // 
             this.btnEdit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnEdit.Location = new System.Drawing.Point(215, 407);
+            this.btnEdit.Location = new System.Drawing.Point(215, 436);
             this.btnEdit.Name = "btnEdit";
             this.btnEdit.Size = new System.Drawing.Size(75, 23);
             this.btnEdit.TabIndex = 6;
@@ -159,7 +170,7 @@
             // btnDel
             // 
             this.btnDel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnDel.Location = new System.Drawing.Point(340, 407);
+            this.btnDel.Location = new System.Drawing.Point(340, 436);
             this.btnDel.Name = "btnDel";
             this.btnDel.Size = new System.Drawing.Size(75, 23);
             this.btnDel.TabIndex = 7;
@@ -170,7 +181,7 @@
             // btnRefresh
             // 
             this.btnRefresh.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnRefresh.Location = new System.Drawing.Point(455, 407);
+            this.btnRefresh.Location = new System.Drawing.Point(455, 436);
             this.btnRefresh.Name = "btnRefresh";
             this.btnRefresh.Size = new System.Drawing.Size(75, 23);
             this.btnRefresh.TabIndex = 8;
@@ -184,14 +195,54 @@
             this.cboCategoryBook.Location = new System.Drawing.Point(90, 41);
             this.cboCategoryBook.Name = "cboCategoryBook";
             this.cboCategoryBook.Size = new System.Drawing.Size(200, 24);
-            this.cboCategoryBook.TabIndex = 0;
+            this.cboCategoryBook.TabIndex = 1;
             this.cboCategoryBook.SelectedIndexChanged += new System.EventHandler(this.cboCategoryBook_SelectedIndexChanged);
+            // 
+            // Column1
+            // 
+            this.Column1.DataPropertyName = "MaSach";
+            this.Column1.HeaderText = "Mã sách";
+            this.Column1.MinimumWidth = 6;
+            this.Column1.Name = "Column1";
+            this.Column1.Width = 125;
+            // 
+            // Column2
+            // 
+            this.Column2.DataPropertyName = "TenLoaiSach";
+            this.Column2.HeaderText = "Loại sách";
+            this.Column2.MinimumWidth = 6;
+            this.Column2.Name = "Column2";
+            this.Column2.Width = 125;
+            // 
+            // Column3
+            // 
+            this.Column3.DataPropertyName = "TieuDe";
+            this.Column3.HeaderText = "Tiêu đề";
+            this.Column3.MinimumWidth = 6;
+            this.Column3.Name = "Column3";
+            this.Column3.Width = 125;
+            // 
+            // Column4
+            // 
+            this.Column4.DataPropertyName = "Gia";
+            this.Column4.HeaderText = "Giá";
+            this.Column4.MinimumWidth = 6;
+            this.Column4.Name = "Column4";
+            this.Column4.Width = 125;
+            // 
+            // Column5
+            // 
+            this.Column5.DataPropertyName = "SoLuong";
+            this.Column5.HeaderText = "Số lượng";
+            this.Column5.MinimumWidth = 6;
+            this.Column5.Name = "Column5";
+            this.Column5.Width = 125;
             // 
             // frmBooks
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(625, 444);
+            this.ClientSize = new System.Drawing.Size(1003, 473);
             this.ControlBox = false;
             this.Controls.Add(this.cboCategoryBook);
             this.Controls.Add(this.btnRefresh);
@@ -238,5 +289,10 @@
         private System.Windows.Forms.Button btnRefresh;
         private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.ComboBox cboCategoryBook;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
     }
 }

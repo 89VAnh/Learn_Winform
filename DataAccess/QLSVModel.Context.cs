@@ -12,23 +12,23 @@ namespace Data.DataAccess
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
-
+    
     public partial class QLSVEntities : DbContext
     {
         public QLSVEntities()
             : base("name=QLSVEntities")
         {
         }
-
+    
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             throw new UnintentionalCodeFirstException();
         }
-
+    
         public virtual DbSet<Acount> Acounts { get; set; }
-        public virtual DbSet<LoaiSach> LoaiSaches { get; set; }
         public virtual DbSet<Lop> Lops { get; set; }
-        public virtual DbSet<Sach> Saches { get; set; }
         public virtual DbSet<SinhVien> SinhViens { get; set; }
+        public virtual DbSet<LoaiSach> LoaiSaches { get; set; }
+        public virtual DbSet<Sach> Saches { get; set; }
     }
 }

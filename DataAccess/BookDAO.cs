@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -12,13 +13,13 @@ namespace Data.DataAccess
     {
         QLSVEntities db = new QLSVEntities();
 
-        public List<Sach> GetBooks()
+        public DbSet<Sach> GetBooks()
         {
-            return db.Saches.ToList();
+            return db.Saches;
         }
-        public List<LoaiSach> GetCategories()
+        public DbSet<LoaiSach> GetCategories()
         {
-            return db.LoaiSaches.ToList();
+            return db.LoaiSaches;
         }
         public void Add(Sach book)
         {
@@ -41,6 +42,7 @@ namespace Data.DataAccess
             db.Saches.Remove(s);
             db.SaveChanges();
         }
-
+        public IQueryable<Sach> GetBookByCategory(string categoryId)
+        { return db.Saches.Where(s => s.MaLoaiSach == categoryId); }
     }
 }
